@@ -1,10 +1,15 @@
 from Functioner import csv_reader
 from Functioner import leg_tracker
 import pandas as pd
-Time_column = csv_reader('/Users/premagrawal/Desktop/PYTHON/Amit/JANIFTY.csv',2)
-Price_column = csv_reader('/Users/premagrawal/Desktop/PYTHON/Amit/JANIFTY.csv',3)
-Trade_Date = csv_reader('/Users/premagrawal/Desktop/PYTHON/Amit/^NSEI.csv',0)
-Open_Price = csv_reader('/Users/premagrawal/Desktop/PYTHON/Amit/^NSEI.csv',1)
+
+import os
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+
+Time_column = csv_reader('Data/JANIFTY.csv',2)
+Price_column = csv_reader('Data/JANIFTY.csv',3)
+Trade_Date = csv_reader('Data/^NSEI.csv',0)
+Open_Price = csv_reader('Data/^NSEI.csv',1)
 Strangle = leg_tracker(Time_column,Trade_Date,Price_column,Open_Price)
 #This function replaces / in dates with - so that it can be matched
 def Replacer(x):
@@ -52,8 +57,8 @@ profit_lower = []
 year_list = ['JAN2020','FEB2020','JAN2019','FEB2019','MAR2019','APR2019','MAY2019','JUN2019','JUL2019','AUG2019','SEP2019','OCT2019','NOV2019','DEC2019','']
 k = 0
 while k < (len(Trade_Date)):
-    upperStrike = '/Users/premagrawal/Desktop/PYTHON/Amit/Data/2020/JAN2020/NIFTY' + str(Strangle['Upper Leg'][str(Trade_Date[k])]) + str('CE.csv')
-    lowerStrike = '/Users/premagrawal/Desktop/PYTHON/Amit/Data/2020/JAN2020/NIFTY' + str(Strangle['Lower Leg'][str(Trade_Date[k])]) + str('PE.csv')
+    upperStrike = 'Data/2020/JAN2020/NIFTY' + str(Strangle['Upper Leg'][str(Trade_Date[k])]) + str('CE.csv')
+    lowerStrike = 'Data/2020/JAN2020/NIFTY' + str(Strangle['Lower Leg'][str(Trade_Date[k])]) + str('PE.csv')
     date_ce = csv_reader(upperStrike,1)
     date_pe = csv_reader(lowerStrike,1)
     time_ce = csv_reader(upperStrike,2)
