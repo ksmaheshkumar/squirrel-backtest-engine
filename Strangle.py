@@ -5,17 +5,31 @@ import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 
-Time_column = csv_reader('Data/JANIFTY.csv',2)
-Price_column = csv_reader('Data/JANIFTY.csv',3)
-Trade_Date = csv_reader('Data/^NSEI.csv',0)
-Open_Price = csv_reader('Data/^NSEI.csv',1)
+# Time_column = csv_reader('Data/JANIFTY.csv',2)
+# Price_column = csv_reader('Data/JANIFTY.csv',3)
+# Trade_Date = csv_reader('Data/^NSEI.csv',0)
+# Open_Price = csv_reader('Data/^NSEI.csv',1)
+
+
+test = pd.read_csv('Data/JANIFTY.csv')
+Time_column = test['TIME']
+Price_column = test['OPEN']
+
+NSEI = pd.read_csv('Data/^NSEI.csv')
+Trade_Date = NSEI['Date']
+Open_Price = NSEI['Open']
+
+
+print(Trade_Date)
 Strangle = leg_tracker(Time_column,Trade_Date,Price_column,Open_Price)
+
 #This function replaces / in dates with - so that it can be matched
 def Replacer(x):
     a = 0
     while a < len(x):
         x[a] = x[a].replace('/','-')
         a += 1
+
 #This function calculates the Entry Point
 def Entry(x,z,b,m):
     a = 0
@@ -28,6 +42,7 @@ def Entry(x,z,b,m):
             else:
                 c += 1
             a += 1
+
 #This function calculates the Exit
 def Exit(x,c,m,k,z):
     a = 0
