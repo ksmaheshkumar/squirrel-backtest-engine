@@ -1,4 +1,3 @@
-import csv
 import pandas
 import numpy
 #This function Adds Header to CSV File
@@ -9,18 +8,14 @@ def add_column_names(src, headers = ["Company Name","NAN","Open","High","Low","C
         fp.write("\n")
         fp.write(data)
 #Above function should only be called once when the CSV file doesn't has header
-#This function is used to Read CSV file and take specific values
-def csv_reader(x,i):
-    data = pandas.read_csv(x)
-    y = data.iloc[:,i]
-    return y
+
 #This function determines which strikes should be traded
 def leg_tracker(x,y,m,n):
     l = 0
     i = 0
     upper_leg = {}
     lower_leg = {}
-    Strangle = {
+    strangle = {
         'Upper Leg' : upper_leg,
         'Lower Leg' : lower_leg
     }
@@ -37,4 +32,4 @@ def leg_tracker(x,y,m,n):
             else :
                 l += 1
         break
-    return Strangle
+    return strangle
