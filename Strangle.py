@@ -1,5 +1,4 @@
-from Functioner import csv_reader
-from Functioner import leg_tracker
+from Functioner import *
 import pandas as pd
 
 import os
